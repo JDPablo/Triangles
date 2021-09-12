@@ -1,0 +1,46 @@
+import unittest
+import math
+
+from trianglescode import Triangles
+
+
+class TestClassify(unittest.TestCase):
+    def test_triangles(self):
+        a = 3
+        b = 4
+        c = 5
+        result = Triangles.classify_triangle(a, b, c)
+        self.assertEqual(result, "scalene and right")
+
+        a = 2
+        b = 2
+        c = 2
+        result = Triangles.classify_triangle(a, b, c)
+        self.assertEqual(result, "equilateral")
+
+        a = 3
+        b = 3
+        c = math.sqrt(18)
+        result = Triangles.classify_triangle(a, b, c)
+        self.assertEqual(result, "isosceles")
+
+        # this test should pass but doesn't. 0, 2, 2 should not count as isosceles and right, but does because a != b == c.
+        # however, cannot have triangles with 0 side length
+        a = 0
+        b = 2
+        c = 2
+        result = Triangles.classify_triangle(a, b, c)
+        self.assertNotEqual(result, "isosceles and right")
+
+        # this test should pass but doesn't . 0, 2, 2 should not count as scalene and right, but does because (-3)^2 + (4)^2 is indeed equal to (5)^2.
+        # however, cannot have triangles with negative side length
+        a = -3
+        b = 4
+        c = 5
+        result = Triangles.classify_triangle(a, b, c)
+        self.assertNotEqual(result, "scalene and right")
+
+
+if __name__ == '__main__':
+    unittest.main()
+
