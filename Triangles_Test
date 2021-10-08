@@ -1,46 +1,51 @@
+"""part of a homework assignment: see function docstring below"""
 import unittest
 import math
 
-from trianglescode import Triangles
+from trianglescode import triangles
 
 
 class TestClassify(unittest.TestCase):
+    """suite of test cases"""
     def test_triangles(self):
-        a = 3
-        b = 4
-        c = 5
-        result = Triangles.classify_triangle(a, b, c)
+        """sub-suite of test cases to test various triangles and my classification function"""
+        side_a = 3
+        side_b = 4
+        side_c = 5
+        result = triangles.classify_triangle(side_a, side_b, side_c)
         self.assertEqual(result, "scalene and right")
 
-        a = 2
-        b = 2
-        c = 2
-        result = Triangles.classify_triangle(a, b, c)
+        side_a = 2
+        side_b = 2
+        side_c = 2
+        result = triangles.classify_triangle(side_a, side_b, side_c)
         self.assertEqual(result, "equilateral")
 
-        a = 3
-        b = 3
-        c = math.sqrt(18)
-        result = Triangles.classify_triangle(a, b, c)
+        side_a = 3
+        side_b = 3
+        side_c = math.sqrt(18)
+        result = triangles.classify_triangle(side_a, side_b, side_c)
         self.assertEqual(result, "isosceles")
 
-        # this test should pass but doesn't. 0, 2, 2 should not count as isosceles and right, but does because a != b == c.
+        # this test should pass but doesn't.
+        # 0, 2, 2 should not count as isosceles and right, but does because a != b == c.
         # however, cannot have triangles with 0 side length
-        a = 0
-        b = 2
-        c = 2
-        result = Triangles.classify_triangle(a, b, c)
+        side_a = 0
+        side_b = 2
+        side_c = 2
+        result = triangles.classify_triangle(side_a, side_b, side_c)
         self.assertNotEqual(result, "isosceles and right")
 
-        # this test should pass but doesn't . 0, 2, 2 should not count as scalene and right, but does because (-3)^2 + (4)^2 is indeed equal to (5)^2.
+        # this test should pass but doesn't.
+        # 0, 2, 2 should not count as scalene and right,
+        # but does because (-3)^2 + (4)^2 is indeed equal to (5)^2.
         # however, cannot have triangles with negative side length
-        a = -3
-        b = 4
-        c = 5
-        result = Triangles.classify_triangle(a, b, c)
+        side_a = -3
+        side_b = 4
+        side_c = 5
+        result = triangles.classify_triangle(side_a, side_b, side_c)
         self.assertNotEqual(result, "scalene and right")
 
 
 if __name__ == '__main__':
     unittest.main()
-
